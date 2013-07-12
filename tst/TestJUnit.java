@@ -10,15 +10,8 @@ public class TestJUnit {
 
     @Test
     public void testGameOfLifeLayoutConstructor(){
-        GameOfLife game = new GameOfLife(3, 3, "000010000");
-        assertEquals(true, game.findCell(1, 1).isAlive());
-    }
-
-    @Test
-    public void testLayoutOutput(){
-        GameOfLife game = new GameOfLife(3, 3, "001001001");
-        String layout = game.currentGenerationLayout();
-        assertEquals("001001001", layout);
+        GameOfLife game = new GameOfLife(3, 3, "001010001");
+        assertEquals("001010001", game.currentGenerationLayout());
     }
 
     @Test
