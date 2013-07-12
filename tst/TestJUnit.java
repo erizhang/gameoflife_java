@@ -3,21 +3,22 @@ import static org.junit.Assert.assertEquals;
 
 public class TestJUnit {
     @Test
-    public void testAdd() {
-        String str= "Junit is working fine";
-        assertEquals("Junit is working fine",str);
-    }
-
-    @Test
-    public void testCell(){
+    public void testGameOfLifeDefaultConstructor(){
         GameOfLife game = new GameOfLife(2, 2);
-        assertEquals(false, game.findCell(1, 1).isAlive());
+        assertEquals("0000", game.currentGenerationLayout());
     }
 
     @Test
-    public void testGameLayout(){
+    public void testGameOfLifeLayoutConstructor(){
         GameOfLife game = new GameOfLife(3, 3, "000010000");
         assertEquals(true, game.findCell(1, 1).isAlive());
+    }
+
+    @Test
+    public void testLayoutOutput(){
+        GameOfLife game = new GameOfLife(3, 3, "001001001");
+        String layout = game.currentGenerationLayout();
+        assertEquals("001001001", layout);
     }
 
     @Test
