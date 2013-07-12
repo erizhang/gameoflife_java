@@ -23,10 +23,18 @@ public class TestJUnit {
     }
 
     @Test
-    public void testNextGenerationLiveCellWithOneNeighbours(){
+    public void testNextGenerationLiveCellWithOneLiveNeighbours(){
         GameOfLife game = new GameOfLife(3, 3, "010010000");
         game.nextGeneration();
         String layout = game.currentGenerationLayout();
         assertEquals("000000000", layout);
+    }
+
+    @Test
+    public void testNextGenerationDeadCellWithThreeLiveNeighbours(){
+        GameOfLife game = new GameOfLife(3, 3, "010101000");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("000010000", layout);
     }
 }
