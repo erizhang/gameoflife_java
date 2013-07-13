@@ -23,11 +23,24 @@ public class GameOfLife {
 
     private void __render(String layout){
         for (int i = 0; i < this.size; i++) {
-            char c = layout.charAt(i);
-            if (c == '1') {
+            if (layout.charAt(i) == '1') {
                 this.cells[i].live();
             }
         }
+    }
+
+    private int __indexByCoordinate(int col, int row) {
+        int idx = 0;
+        return idx = row * this.width + col;
+    }
+
+    private Cell __getCell(int col, int row){
+        if ((col < 0 || col >= this.width) ||
+            (row < 0 || row >= this.height)) {
+            return null;
+        }
+        int idx = __indexByCoordinate(col, row);
+        return this.cells[idx];
     }
 
     private void __createCells(){
@@ -35,12 +48,10 @@ public class GameOfLife {
         int idx = 0;
         for (int x = 0; x < this.width; x++){
             for (int y = 0; y < this.height; y++){
-                idx = y * width + x;
+                idx = this.__indexByCoordinate(x, y);
                 this.cells[idx] = new Cell(x, y);
-                System.out.print(".");
             }
         }
-        System.out.println();
     }
 
     private int __countAliveCell(int col, int row){
@@ -48,10 +59,8 @@ public class GameOfLife {
             (row < 0 || row >= this.height)) {
             return 0;
         }
-        int idx = 0;
-        idx = row * this.width + col;
-        char c = this.currentLayout.charAt(idx);
-        if (c == '1') {
+        int idx = this.__indexByCoordinate(col, row);
+        if (this.currentLayout.charAt(idx) == '1') {
             return 1;
         }
         return 0;
@@ -72,18 +81,19 @@ public class GameOfLife {
 
     public void nextGeneration(){
         this.currentLayout = this.currentGenerationLayout();
-        int idx = 0;
+
         for (int x = 0; x < this.width; x++){
             for (int y = 0; y < this.height; y++){
-                idx = y * width + x;
                 int count = this.__aliveNeighboursCount(x, y);
-                if (count == 3 && this.cells[idx].isAlive() == false) {
-                    this.cells[idx].live();
+                Cell cell = this.__getCell(x, y);
+
+                if (count == 3){
+                    cell.live();
                     continue;
                 }
 
-                if (this.cells[idx].isAlive() && (count < 2 || count > 3)) {
-                    this.cells[idx].die();
+                if (count < 2 || count > 3) {
+                    cell.die();
                 }
             }
         }
