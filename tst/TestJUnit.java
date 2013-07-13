@@ -35,6 +35,6 @@ public class TestJUnit {
         GameOfLife game = new GameOfLife(3, 3, "010101000");
         game.nextGeneration();
         String layout = game.currentGenerationLayout();
-        assertEquals("000010000", layout);
+        assertEquals("010010000", layout);
     }
 }
