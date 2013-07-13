@@ -45,4 +45,41 @@ public class TestJUnit {
         String layout = game.currentGenerationLayout();
         assertEquals("011101010", layout);
     }
+
+    @Test
+    public void testNextGenerationBlockStyle(){
+        GameOfLife game = new GameOfLife(4, 4, "0000011001100000");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("0000011001100000", layout);
+    }
+
+    @Test
+    public void testNextGenerationBeehiveStyle(){
+        GameOfLife game = new GameOfLife(6, 5, "000000001100010010001100000000");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("000000001100010010001100000000", layout);
+    }
+
+    @Test
+    public void testNextGenerationBoatStyle(){
+        GameOfLife game = new GameOfLife(5, 5, "0000001100010100010000000");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("0000001100010100010000000", layout);
+    }
+
+    @Test
+    public void testNextGenerationBlinkerStyle(){
+        GameOfLife game = new GameOfLife(5, 5, "0000000100001000010000000");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("0000000000011100000000000", layout);
+
+        game.nextGeneration();
+        layout = game.currentGenerationLayout();
+        assertEquals("0000000100001000010000000", layout);
+    }
+
 }
