@@ -37,4 +37,12 @@ public class TestJUnit {
         String layout = game.currentGenerationLayout();
         assertEquals("010010000", layout);
     }
+
+    @Test
+    public void testNextGenerationLiveCellWithFourLiveNeighbours(){
+        GameOfLife game = new GameOfLife(3, 3, "011011100");
+        game.nextGeneration();
+        String layout = game.currentGenerationLayout();
+        assertEquals("011101010", layout);
+    }
 }
