@@ -1,0 +1,4 @@
+export CLASSPATH=$CLASSPATH:./junit_home/junit-4.10.jar
+javac -sourcepath ./tst:./src ./tst/*.java
+java -classpath $CLASSPATH:./src:./tst TestRunner
+rm ./src/*.class ./tst/*.class -f
