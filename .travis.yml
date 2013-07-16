@@ -1,3 +1,5 @@
+install: true
+script: ./runut.sh
 language: java
 jdk:
   - oraclejdk7
