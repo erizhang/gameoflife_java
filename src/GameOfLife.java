@@ -6,13 +6,6 @@ public class GameOfLife {
     private Cell [] cells;
     private String currentLayout;
 
-    public GameOfLife(int w, int h){
-        this.width = w;
-        this.height = h;
-        this.size = w*h;
-        this.__createCells();
-    }
-
     public GameOfLife(int w, int h, String layout){
         this.width = w;
         this.height = h;

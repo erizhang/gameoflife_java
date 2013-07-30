@@ -3,12 +3,6 @@ import static org.junit.Assert.assertEquals;
 
 public class TestJUnit {
     @Test
-    public void testGameOfLifeDefaultConstructor(){
-        GameOfLife game = new GameOfLife(2, 2);
-        assertEquals("0000", game.currentGenerationLayout());
-    }
-
-    @Test
     public void testGameOfLifeLayoutConstructor(){
         GameOfLife game = new GameOfLife(3, 3, "001010001");
         assertEquals("001010001", game.currentGenerationLayout());
