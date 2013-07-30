@@ -4,7 +4,6 @@ public class GameOfLife {
     private int height;
     private int size;
     private Cell [] cells;
-    private String currentLayout;
 
     public GameOfLife(int w, int h, String layout){
         this.width = w;
@@ -48,12 +47,9 @@ public class GameOfLife {
     }
 
     private int __countAliveCell(int col, int row){
-        if ((col < 0 || col >= this.width) ||
-            (row < 0 || row >= this.height)) {
-            return 0;
-        }
-        int idx = this.__indexByCoordinate(col, row);
-        if (this.currentLayout.charAt(idx) == '1') {
+        Cell cell = this.__getCell(col, row);
+
+        if (null != cell && cell.isAlive()) {
             return 1;
         }
         return 0;
@@ -68,12 +64,21 @@ public class GameOfLife {
              count += this.__countAliveCell(col + offset[i][0], row + offset[i][1]);
 
         }
+
         return count;
     }
 
+    private void __saveCurrentCellsState() {
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
+                Cell cell = this.__getCell(x, y);
+                cell.saveState();
+            }
+        }
+    }
 
     public void nextGeneration(){
-        this.currentLayout = this.currentGenerationLayout();
+        this.__saveCurrentCellsState();
 
         for (int x = 0; x < this.width; x++){
             for (int y = 0; y < this.height; y++){
@@ -93,6 +98,7 @@ public class GameOfLife {
     }
 
     public String currentGenerationLayout(){
+        this.__saveCurrentCellsState();
         String layout = "";
         for (int i = 0; i < this.size; i++){
             if (this.cells[i].isAlive()){
